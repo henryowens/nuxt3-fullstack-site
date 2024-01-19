@@ -9,3 +9,17 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+enum Status {
+  TO_DO
+  PENDING
+  COMPLETED
+}
+
+model Task {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  status    Status   @default(TO_DO)
+}
